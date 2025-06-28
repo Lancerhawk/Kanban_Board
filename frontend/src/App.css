@@ -6,19 +6,79 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
 }
 
 /* Navigation Styles */
 .nav-item {
-  @apply px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200;
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.2s;
+  border-radius: 0;
+  background: none;
+}
+
+.nav-item:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: 0.2rem;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+.nav-item:hover,
+.nav-item:focus {
+  color: #6366f1;
+}
+
+.nav-item:hover:after,
+.nav-item:focus:after {
+  opacity: 1;
+  transform: scaleX(1);
+  left: 10%;
+  right: 10%;
 }
 
 .nav-item-active {
-  @apply text-purple-700 bg-purple-100;
+  color: #6366f1;
+}
+
+.nav-item-active:after {
+  opacity: 1;
+  transform: scaleX(1);
+  left: 10%;
+  right: 10%;
 }
 
 .nav-item-inactive {
-  @apply text-gray-600 hover:text-gray-900 hover:bg-gray-100;
+  color: #1e293b;
+}
+
+/* Logout button in navbar */
+.navbar-logout-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+}
+.navbar-logout-btn:hover {
+  background: #f1f5f9;
+  color: #6366f1;
 }
 
 /* Card Styles */
@@ -177,26 +237,6 @@
   @apply transform rotate-2 shadow-lg;
 }
 
-/* Modal Styles */
-.modal-overlay {
-  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4;
-}
-
-.modal-content {
-  @apply bg-white rounded-2xl max-w-md w-full max-h-96 overflow-y-auto shadow-2xl;
-}
-
-.modal-header {
-  @apply px-6 py-4 border-b border-gray-200;
-}
-
-.modal-body {
-  @apply px-6 py-4;
-}
-
-.modal-footer {
-  @apply px-6 py-4 border-t border-gray-200 flex justify-end space-x-3;
-}
 
 /* Animation Classes */
 .fade-in {
@@ -295,4 +335,80 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Custom scrollbar for Recent Activity only */
+.recent-activity-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+  background: transparent;
+}
+.recent-activity-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.recent-activity-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a5b4fc;
+}
+.recent-activity-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.recent-activity-scroll {
+  scrollbar-width: thin;           /* Firefox */
+  scrollbar-color: #d1d5db transparent; /* Firefox */
+}
+
+/* --- Mobile Sidebar Styles --- */
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0.5; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in {
+  animation: slide-in 0.25s cubic-bezier(.4,0,.2,1);
+}
+.mobile-sidebar {
+  box-shadow: 0 0 24px 0 rgba(80, 80, 120, 0.10);
+  min-width: 220px;
+  max-width: 90vw;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 60;
+}
+.mobile-sidebar .nav-item {
+  display: block;
+  padding: 0.75rem 0.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+  text-align: left;
+}
+.mobile-sidebar .nav-item-active {
+  color: #6366f1;
+}
+.mobile-sidebar .nav-item:after {
+  display: none;
+}
+.mobile-sidebar .navbar-logout-btn {
+  margin-top: auto;
+  background: #178bff;
+  color: #6366f1;
+  border-radius: 4px;
+  font-weight: 500;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(80, 80, 120, 0.06);
+  opacity: 1 !important;
+  filter: none !important;
+}
+.mobile-sidebar .navbar-logout-btn:hover {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+.mobile-sidebar .navbar-logout-btn svg {
+  opacity: 1 !important;
+  color: inherit;
 }
