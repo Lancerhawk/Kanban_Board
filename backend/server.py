@@ -248,10 +248,7 @@ async def get_tasks(
     query = {"user_id": current_user.id}
     if project_id:
         query["project_id"] = project_id
-    else:
-        # For individual tasks, get tasks without project_id or with None/null project_id
-        query["$or"] = [{"project_id": None}, {"project_id": {"$exists": False}}]
-    
+    # If no project_id, return ALL tasks for the user (including project tasks)
     tasks = await db.tasks.find(query).to_list(1000)
     return [Task(**task) for task in tasks]
 
