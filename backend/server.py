@@ -248,10 +248,7 @@ async def get_tasks(
     query = {"user_id": current_user.id}
     if project_id:
         query["project_id"] = project_id
-    else:
-        # For individual tasks, get tasks without project_id or with None/null project_id
-        query["$or"] = [{"project_id": None}, {"project_id": {"$exists": False}}]
-    
+    # If no project_id is specified, return all tasks for the user (no $or filter)
     tasks = await db.tasks.find(query).to_list(1000)
     return [Task(**task) for task in tasks]
 
@@ -417,3 +414,4 @@ async def shutdown_db_client():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+    
