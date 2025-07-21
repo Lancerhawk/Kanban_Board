@@ -242,18 +242,15 @@ const EventModal = ({ eventInfo, isEditing, onClose, calendarRef }) => {
           <div className="event-modal-form-group">
             <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="event-modal-input" />
           </div>
-          <div className="event-modal-form-group color-picker-row">
+          <div className="event-modal-form-group color-picker-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <label className="color-picker-label" htmlFor="event-color">Event Color</label>
-            <button className="custom-color-swatch" style={{ background: color }} onClick={handleColorClick} aria-label="Pick event color" type="button" />
             <input
               id="event-color"
               type="color"
-              ref={colorInputRef}
-              className="color-picker-input-hidden"
+              className="color-picker-input"
               value={color}
               onChange={e => setColor(e.target.value)}
-              tabIndex={-1}
-              aria-hidden="true"
+              aria-label="Pick custom color"
             />
           </div>
           <div className="event-modal-form-group preset-color-row">
@@ -263,7 +260,7 @@ const EventModal = ({ eventInfo, isEditing, onClose, calendarRef }) => {
                 type="button"
                 className={`preset-color-swatch${color === preset ? ' preset-color-swatch-active' : ''}`}
                 style={{ background: preset }}
-                onClick={() => handlePresetColor(preset)}
+                onClick={() => setColor(preset)}
                 aria-label={`Choose color ${preset}`}
               />
             ))}
@@ -279,4 +276,4 @@ const EventModal = ({ eventInfo, isEditing, onClose, calendarRef }) => {
   );
 };
 
-export default CalendarPage; 
+export default CalendarPage;

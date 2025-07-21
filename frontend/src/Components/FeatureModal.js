@@ -38,11 +38,11 @@ export default function FeatureModal() {
             <button className="feature-modal-close no-gradient" onClick={() => setOpen(false)} aria-label="Close features">×</button>
             <h2>🚀 New Features</h2>
             <ul className="feature-list">
-              {currentFeatures.map(f => <li key={f}>✅ {f}</li>)}
+              {currentFeatures.map(f => <li key={f}>- {f}</li>)}
             </ul>
             <h3>🔮 Upcoming</h3>
             <ul className="feature-list upcoming">
-              {upcomingFeatures.map(f => <li key={f}>⏳ {f}</li>)}
+              {upcomingFeatures.map(f => <li key={f}>- {f}</li>)}
             </ul>
           </div>
         </div>
