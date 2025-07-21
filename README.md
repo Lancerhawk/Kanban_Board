@@ -4,6 +4,20 @@ A modern, cozy, and fully responsive Kanban web application for managing tasks a
 
 ---
 
+## 🚀 New Features (2025)
+
+- Beautiful, fully responsive calendar with drag, drop, and resize
+- Event color coding and categorization
+- Persistent event storage (database integration)
+- Touch and mobile support
+- Custom event modal with color picker
+- Horizontal scroll for calendar grid on small screens
+- Modern, professional UI/UX
+- Floating question mark button for feature updates
+- Feature modal listing current and upcoming features
+
+---
+
 ## ✨ Features
 
 - **Dashboard Overview**: See stats, recent activity, deadlines, overdue & high-priority tasks, productivity, and motivational quotes.
