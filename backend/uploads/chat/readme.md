@@ -1,0 +1,1 @@
+This is just an Empty File for Chats static storing
