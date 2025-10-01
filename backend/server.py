@@ -21,6 +21,7 @@ import random
 from bson import ObjectId
 import json
 from dateutil import parser
+import hashlib
 
 def serialize_for_json(obj):
     if isinstance(obj, dict):
@@ -44,7 +45,7 @@ jwt_expiration_hours = int(os.environ['JWT_EXPIRATION_HOURS'])
 client = AsyncIOMotorClient(mongo_url, tls=False)
 db = client[db_name]
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 security = HTTPBearer()
 
 app = FastAPI(title="Kanban Todo API", version="1.0.0")
@@ -196,10 +197,13 @@ class CalendarEvent(BaseModel):
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    # With argon2, you can hash longer passwords directly
+    sha256_hash = hashlib.sha256(password.encode()).hexdigest()
+    return pwd_context.hash(sha256_hash)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+    sha256_hash = hashlib.sha256(plain_password.encode()).hexdigest()
+    return pwd_context.verify(sha256_hash, hashed_password)
 
 def create_access_token(data: dict) -> str:
     to_encode = data.copy()
