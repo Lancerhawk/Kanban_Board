@@ -1,6 +1,6 @@
 # TaskFlow Kanban App
 
-A modern, cozy, and fully responsive Kanban web application for managing tasks and projects with a beautiful dashboard, analytics, and mobile-friendly navigation. 
+A modern, cozy, and fully responsive Kanban web application for managing tasks and projects with a beautiful dashboard, analytics, and mobile-friendly navigation.  
 
 ---
 
